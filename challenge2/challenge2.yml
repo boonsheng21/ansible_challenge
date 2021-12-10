@@ -1,0 +1,52 @@
+---
+- hosts: localhost
+  tasks: 
+     - name: Run the "pwd" command
+       shell: pwd
+       register: output1 
+     - debug :   
+         var: output1.stdout_lines
+
+     - name: Run the "ls" command in "practice" folder
+       shell: ls practice  
+       register: output1 
+     - debug :
+         var: output1.stdout_lines
+
+     - name: Copy & rename "Test" folder to "Reprot" folder
+       shell: "cp -fR ./practice/Test/ ./practice/Report"  
+       register: output1 
+     - debug :
+         var: output1.stdout_lines
+
+     - name: Copy file1 to file2 inside the "Test" folder
+       shell: "cp -f ./practice/Test/file1.txt ./practice/Test/file2"  
+       register: output1 
+     - debug :
+         var: output1.stdout_lines
+
+     - name: Run the "ls" command
+       shell: ls -lh practice  
+       register: output1 
+     - debug :
+         var: output1.stdout_lines
+
+     - name: Create a new file3.conf in Test folder
+       shell: touch ./practice/Test/file3.conf 
+       register: output1 
+     - debug :
+         var: output1.stdout_lines
+
+     - name: List the .conf file inside "Test" folder
+       shell: ls ./practice/Test/*.conf  
+       register: output1 
+     - debug :
+         var: output1.stdout_lines
+
+     - name: Remove the "Report" folder
+       shell: "rm -rf ./practice/Report"  
+       register: output1 
+     - debug :
+         var: output1.stdout_lines
+
+

@@ -1,0 +1,30 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+     - name: Create Linux username via script01.sh
+       script: ./script01.sh
+
+     - name: Display the created username
+       shell: cat /etc/passwd   
+       register: output1 
+     - debug :
+         var: output1.stdout_lines
+
+     - name: Create Linux groupname via script02.sh
+       script: ./script02.sh
+
+     - name: Adding Jen and william to all groups via script03.sh
+       script: ./script03.sh
+
+     - name: Adding matt sam anne danny into sales group via script04.sh
+       script: ./script04.sh
+
+     - name: Display all user & groups as per instructed
+       shell: cat /etc/group   
+       register: output1 
+     - debug :
+         var: output1.stdout_lines
+
+
+

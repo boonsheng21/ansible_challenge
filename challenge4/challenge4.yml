@@ -1,0 +1,30 @@
+---
+- hosts: localhost
+  # become: yes #turn you into a super user
+  # connection: local
+  
+  # vars_files: #refer varibale from file
+  #    - vars.yml
+  tasks: 
+     - name: Run the pwd command
+       shell: pwd
+       register: output1 
+     - debug :   
+         var: output1.stdout_lines
+
+     - name: Make dir pratice
+#       shell: mkdir pratice 2>/dev/null  || true  
+       shell: mkdir pratice || true  #can ignore the error of exisiting folder
+
+     - name: create a file1 
+       shell: touch {{ my_path }}/pratice/file1.txt
+   
+     - name: Listlist contents
+       shell: ls > {{ my_path }}/pratice/file1.txt
+
+     - name: writing to file1.txt
+       shell: echo 'write something into file1' >> {{ my_path }}/pratice/file1.txt  
+
+     - name: checking the localhost dir   
+       shell: echo {{ansible_playbook_python}} >> {{ my_path }}/pratice/file1.txt
+
